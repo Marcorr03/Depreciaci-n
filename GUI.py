@@ -113,99 +113,99 @@ class Activos:
    
     def Pantalla_linea_recta():  
         global Linea_R_Lab,TablaLinea,Act_L
-        Linea_R_Lab=tk.Label(app,text="CALCULO LINEA RECTA", font=("Arial",18))
-        Linea_R_Lab.place(x=670,y=200)
+        if(VU_entry.get()!=""):
+            Linea_R_Lab=tk.Label(app,text="CALCULO LINEA RECTA", font=("Arial",18))
+            Linea_R_Lab.place(x=670,y=200)
 
-        TablaLinea=ttk.Treeview(app,columns=("V_Act", "Anos", "Dep_Anual","Dep_Acumulada", "V_libros"),show="headings")
-        TablaLinea.heading("V_Act",text="Valor_Activo")
-        TablaLinea.heading("Anos",text="Ano")
-        TablaLinea.heading("Dep_Anual",text="Depreciacion Anual")
-        TablaLinea.heading("Dep_Acumulada",text="Depreciacion Acumulada")
-        TablaLinea.heading("V_libros",text="Valor en libros")
+            TablaLinea=ttk.Treeview(app,columns=("V_Act", "Anos", "Dep_Anual","Dep_Acumulada", "V_libros"),show="headings")
+            TablaLinea.heading("V_Act",text="Valor_Activo")
+            TablaLinea.heading("Anos",text="Ano")
+            TablaLinea.heading("Dep_Anual",text="Depreciacion Anual")
+            TablaLinea.heading("Dep_Acumulada",text="Depreciacion Acumulada")
+            TablaLinea.heading("V_libros",text="Valor en libros")
+            
+            TablaLinea.column("V_Act", width=150)
+            TablaLinea.column("Anos", width=60)
+            TablaLinea.column("Dep_Anual", width=150)
+            TablaLinea.column("Dep_Acumulada", width=150)
+            TablaLinea.column("V_libros", width=150) 
         
-        TablaLinea.column("V_Act", width=150)
-        TablaLinea.column("Anos", width=60)
-        TablaLinea.column("Dep_Anual", width=150)
-        TablaLinea.column("Dep_Acumulada", width=150)
-        TablaLinea.column("V_libros", width=150) 
-    
-        for i in range(int(VU_entry.get()) + 1):
-            if i == 0:
-                Valor_Act=int(Vh_entry.get())
-                Depre_A = 0
-                Depre_Acu = 0
-                VL = int(Vh_entry.get() )
-            else:
-                Valor_Act=int(Vh_entry.get())
-                Depre_A = (int(Vh_entry.get())-int(Vhr_entry.get()) )/int(VU_entry.get())
-                Depre_Acu = Depre_A * i
-                VL = Valor_Act - Depre_Acu   
-            Act_L= {"Valor_historico": Valor_Act,"Ano": i ,"Depreciacion_Anual":Depre_A, "Depreciacion_Acumulada":Depre_Acu,"Valor_libros":VL}       
-             
-            TablaLinea.insert("", tk.END, values=(Valor_Act ,i,Depre_A if i != 0 else '', Depre_Acu if i > 0 else '', VL))
-            ListaAct_L["Activos_L"].extend([Act_L])
-           
-        TablaLinea.place(x=530,y=270) 
+            
+            for i in range(int(VU_entry.get()) + 1):
+                if i == 0:
+                    Valor_Act=int(Vh_entry.get())
+                    Depre_A = 0
+                    Depre_Acu = 0
+                    VL = int(Vh_entry.get() )
+                else:
+                    Valor_Act=int(Vh_entry.get())
+                    Depre_A = (int(Vh_entry.get())-int(Vhr_entry.get()) )/int(VU_entry.get())
+                    Depre_Acu = Depre_A * i
+                    VL = Valor_Act - Depre_Acu   
+                Act_L= {"Valor_historico": Valor_Act,"Ano": i ,"Depreciacion_Anual":Depre_A, "Depreciacion_Acumulada":Depre_Acu,"Valor_libros":VL}       
+                
+                TablaLinea.insert("", tk.END, values=(Valor_Act ,i,Depre_A if i != 0 else '', Depre_Acu if i > 0 else '', VL))
+                ListaAct_L["Activos_L"].extend([Act_L])
+            
+            TablaLinea.place(x=530,y=270) 
   
     def Pantalla_suma_digitos():  
         global Sum_entry,sum_LAB,TablaSuma,Sum_Lab,Act_S
-        Sum_Lab=tk.Label(app,text="CALCULO SUMA DE DIGITOS", font=("Arial",18))
-        Sum_Lab.place(x=650,y=200)
-        sum_LAB=tk.Label(app,text="Suma de los años",font=("Arial",9))
-        sum_LAB.place(x=52,y=450,height=20,width=170)
-        Sum_entry=tk.Entry(app )
-        Sum_entry.place(x=250,y=450,height=20,width=170)
+        if(VU_entry.get()!=""):
+            Sum_Lab=tk.Label(app,text="CALCULO SUMA DE DIGITOS", font=("Arial",18))
+            Sum_Lab.place(x=650,y=200)
+            sum_LAB=tk.Label(app,text="Suma de los años",font=("Arial",9))
+            sum_LAB.place(x=52,y=450,height=20,width=170)
+            Sum_entry=tk.Entry(app )
+            Sum_entry.place(x=250,y=450,height=20,width=170)
 
-        TablaSuma=ttk.Treeview(app,columns=("Anos","Valor_his" ,"Costo_D","S.D.A", "Imp.dep","Dep_Acumulada","V_librosS"),show="headings")
-        TablaSuma.heading("Anos",text="Anos")
-        TablaSuma.heading("Valor_his",text="Valor historico")
-        TablaSuma.heading("Costo_D",text="Costo_Depreciable")
-        TablaSuma.heading("S.D.A",text="s.d.a")
-        TablaSuma.heading("Imp.dep",text="Importe Depreciacion")
-        TablaSuma.heading("Dep_Acumulada",text="Depreciacion Acumulada")
-        TablaSuma.heading("V_librosS",text="Valor Libros")
+            TablaSuma=ttk.Treeview(app,columns=("Anos","Valor_his" ,"Costo_D","S.D.A", "Imp.dep","Dep_Acumulada","V_librosS"),show="headings")
+            TablaSuma.heading("Anos",text="Anos")
+            TablaSuma.heading("Valor_his",text="Valor historico")
+            TablaSuma.heading("Costo_D",text="Costo_Depreciable")
+            TablaSuma.heading("S.D.A",text="s.d.a")
+            TablaSuma.heading("Imp.dep",text="Importe Depreciacion")
+            TablaSuma.heading("Dep_Acumulada",text="Depreciacion Acumulada")
+            TablaSuma.heading("V_librosS",text="Valor Libros")
 
-        TablaSuma.column("Anos", width=40)
-        TablaSuma.column("Valor_his", width=90)
-        TablaSuma.column("Costo_D", width=110)
-        TablaSuma.column("S.D.A",width=60)
-        TablaSuma.column("Imp.dep",width=150)
-        TablaSuma.column("Dep_Acumulada",width=150)
-        TablaSuma.column("V_librosS",width=110)
-        global sum
-        sum=0
-        for i in range(int(VU_entry.get()) + 1):
-            sum=sum+i
-        
-        for i in range(int(VU_entry.get()) + 1): 
-            if i == 0: 
-                Des=0
-                Valor_h=int(Vh_entry.get())
-                Costo_Dep = 0
-                SDA = 0
-                Imp_dep=0
-                Dep_Acu =0 
-                VL = int(Vh_entry.get() )
-            else:
-                if Des==0:
-                    Des=int(VU_entry.get())+1
-                Des= Des - 1
-                Valor_h=int(Vh_entry.get())
-                Costo_Dep = int(Vh_entry.get())-int(Vhr_entry.get()) 
-                SDA =Des / sum
-                Imp_dep=SDA*Costo_Dep
-                Dep_Acu=Imp_dep+Dep_Acu
-                VL = Valor_h - Dep_Acu
-            Act_S={"Suma anos":sum,"Ano": i ,"Valor_historico": Valor_h ,"Costo_depreciable":Costo_Dep, "SDA":SDA,"Importe_Depreciable": Imp_dep,"Depreciacion_Acumulada":Dep_Acu,"Valor_libros":VL}      
-            print( Des ,sum)
-             
-             
-            TablaSuma.insert("", tk.END, values=( i,Valor_h,Costo_Dep if i != 0 else '', SDA if i > 0 else '',Imp_dep if i > 0 else '',Dep_Acu if i > 0 else '', VL))
-            ListaAct_S["Activos_S"].extend([Act_S])
-        Sum_entry.insert(0,sum)
-        Sum_entry.config(state='readonly')
-        TablaSuma.place(x=530,y=270) 
-        print( ListaAct_S["Activos_S"])  
+            TablaSuma.column("Anos", width=40)
+            TablaSuma.column("Valor_his", width=90)
+            TablaSuma.column("Costo_D", width=110)
+            TablaSuma.column("S.D.A",width=60)
+            TablaSuma.column("Imp.dep",width=150)
+            TablaSuma.column("Dep_Acumulada",width=150)
+            TablaSuma.column("V_librosS",width=110)
+            global sum
+            sum=0
+            for i in range(int(VU_entry.get()) + 1):
+                sum=sum+i
+            
+            for i in range(int(VU_entry.get()) + 1): 
+                if i == 0: 
+                    Des=0
+                    Valor_h=int(Vh_entry.get())
+                    Costo_Dep = 0
+                    SDA = 0
+                    Imp_dep=0
+                    Dep_Acu =0 
+                    VL = int(Vh_entry.get() )
+                else:
+                    if Des==0:
+                        Des=int(VU_entry.get())+1
+                    Des= Des - 1
+                    Valor_h=int(Vh_entry.get())
+                    Costo_Dep = int(Vh_entry.get())-int(Vhr_entry.get()) 
+                    SDA =Des / sum
+                    Imp_dep=SDA*Costo_Dep
+                    Dep_Acu=Imp_dep+Dep_Acu
+                    VL = Valor_h - Dep_Acu
+                Act_S={"Suma anos":sum,"Ano": i ,"Valor_historico": Valor_h ,"Costo_depreciable":Costo_Dep, "SDA":SDA,"Importe_Depreciable": Imp_dep,"Depreciacion_Acumulada":Dep_Acu,"Valor_libros":VL}      
+                
+                TablaSuma.insert("", tk.END, values=( i,Valor_h,Costo_Dep if i != 0 else '', SDA if i > 0 else '',Imp_dep if i > 0 else '',Dep_Acu if i > 0 else '', VL))
+                ListaAct_S["Activos_S"].extend([Act_S])
+            Sum_entry.insert(0,sum)
+            Sum_entry.config(state='readonly')
+            TablaSuma.place(x=530,y=270)
 
     def ConsultarDepreciaciones():
       Activos.eliminar_todos_los_widgets() 
@@ -233,11 +233,9 @@ class Activos:
         with open(arc,"r")as file:
             datosJSON=json.load(file)["Activos"] 
             ListaActivos["Activos"].extend(datosJSON)  
-            print(ListaActivos)
  
     def Menu():  
         if os.path.exists("Activos_CR.json"):
-            print(ListaActivos["Activos"])
             if(ListaActivos["Activos"]==[]):
                 Activos.llenardicc("Activos_CR.json")
                 
@@ -261,8 +259,7 @@ class Activos:
         MAN_lab.place(x=470,y=100,height=80,width=300)
         bt_JSON_lab=tk.Button(app,text="Generar JSON",command=lambda:Activos.escribir_JSON(ListaActivos))
         bt_JSON_lab.place(x=180,y=300,height=70,width=280)
-        bt_verificacionJSON=tk.Button(app,text="Verificar JSON",command=Activos.VerificarJSON)
-        bt_verificacionJSON.place(x=480,y=300,height=70,width=280)
+        
         bt_XML_lab=tk.Button(app,text="Generar Backup",command=Activos.GenerarXML)
         bt_XML_lab.place(x=780,y=300,height=70,width=280)
         
@@ -290,9 +287,13 @@ class Activos:
         if identificador_ya_existe:
             Activos.mensaje("El identificador del activo ya existe")
         else:
+#//////////////////////////////////////////                     
+#Ambas listas dentro de "[]", [ListaAct_S["Activos_S"]], [ListaAct_L["Activos_L"]]
+            global ListaAct_L,ListaAct_S
             Activo={"ID":Identificador_entry.get(),"Nombre": Nombre_entry.get(),"Responsable": Responsable_entry.get(),"Vmonetario": VMonetario_entry.get(), "VmonetarioR":VMonetarioR_entry.get(),"VvidaU": VidaUtil_entry.get(),"Depreciacion_Lineal":[ListaAct_L["Activos_L"]],"Suma de los anos":sum,"Depreciacion_Suma_Digitos":[ListaAct_S["Activos_S"]]}
             ListaActivos["Activos"].extend([Activo])
-            print(ListaActivos)
+            ListaAct_L={"Activos_L":[]}
+            ListaAct_S={"Activos_S":[]}
             Activos.limpiarentry()
             Activos.mensaje("Activo insertado correctamente")
             identificador_ya_existe = False 
@@ -313,7 +314,6 @@ class Activos:
                 activo["Vmonetario"]=VMonetario_entry.get()
                 activo["VmonetarioR"]=VMonetarioR_entry.get()
                 activo["VvidaU"]=VidaUtil_entry.get() 
-                print(ListaActivos["Activos"])
                 Activos.limpiarentry()
                 break
     
@@ -331,7 +331,6 @@ class Activos:
             if Identificador_entry.get()==activo["ID"]:
                 ListaActivos["Activos"].remove(activo)
                 Activos.limpiarentry()
-                print(ListaActivos)
                 break        
               
 
@@ -365,7 +364,6 @@ class Activos:
 
         global Seleccion
         Seleccion = Metodo_Dep_combo.get() 
-        print(ListaActivos["Activos"])
         for activo in ListaActivos["Activos"]:
             if activo_dep_entry.get()==activo["ID"]:   
                 Vh_entry.insert(0,activo["Vmonetario"])
@@ -376,18 +374,19 @@ class Activos:
             
     def guardardepreciacion ():
         for activo in ListaActivos["Activos"]:
+            print(activo_dep_entry.get(),activo["ID"])
             if activo_dep_entry.get()==activo["ID"]: 
                 if Seleccion=="Linea recta":
+                    print(ListaAct_L)
                     activo["Depreciacion_Lineal"]=ListaAct_L
                 elif Seleccion=="Suma de los digitos": 
+                    print(ListaAct_S)
                     activo["Suma de los anos"]=Sum_entry.get()
                     activo["Depreciacion_Suma_Digitos"]=ListaAct_S 
                   
-            print(ListaActivos )
                     
             
-            Activos.Borrar_d_Calc() 
-            break
+        Activos.Borrar_d_Calc()
 
     def Borrar_d_Calc(): 
         Seleccion = Metodo_Dep_combo.get() 
@@ -409,7 +408,7 @@ class Activos:
         Activos.leer_JSON()
         Activos.escribir_XML(datosJSON)
     
-    def escribir_JSON( ListaActivos):
+    def escribir_JSON(ListaActivos):
         with open ("Activos_CR.json","w") as file:
             json.dump(ListaActivos,file) 
 
@@ -459,9 +458,6 @@ class Activos:
         with open("Activos_CR.xml", "wb") as file:
          tree.write(file, encoding="utf-8", xml_declaration=True)
 
-    def VerificarJSON():
-        pass    
-   
     def limpiar_tabla():
         Metodo_Dep_entry.config(state="normal"), Activo_depC_entry.config(state="normal")
         Seleccion=Metodo_Dep_entry.get() 
@@ -504,10 +500,13 @@ class Activos:
                     TablaLinea.column("Dep_Acumulada", width=150)
                     TablaLinea.column("V_libros", width=150) 
                     for activo in ListaActivos["Activos"] :  
+#//////////////////////////////////////////                     
+#Solo imprimir cuando esta parte no es nula 
                         if(activo["Depreciacion_Lineal"]!=[[]]):
-                            for datos in activo["Depreciacion_Lineal"]["Activos_L"]:  
-                                print(datos["Valor_historico"])
-                                TablaLinea.insert("", tk.END, values=(datos["Valor_historico"] ,datos["Ano"],datos["Depreciacion_Anual"], datos["Depreciacion_Acumulada"], datos["Valor_libros"]))
+                            
+                            if Activo_depC_entry.get()==activo["ID"]:
+                                for datos in activo["Depreciacion_Lineal"]["Activos_L"]:
+                                    TablaLinea.insert("", tk.END, values=(datos["Valor_historico"] ,datos["Ano"],datos["Depreciacion_Anual"], datos["Depreciacion_Acumulada"], datos["Valor_libros"]))
                     
 
                     TablaLinea.place(x=300,y=290)
@@ -539,19 +538,17 @@ class Activos:
                     TablaSuma.column("Dep_Acumulada",width=150)
                     TablaSuma.column("V_librosS",width=110)
                     for activo in ListaActivos["Activos"]:  
+#//////////////////////////////////////////                     
+#Solo imprimir cuando esta parte no es nula                        
                         if(activo["Depreciacion_Suma_Digitos"]!=[[]]):
-                            for datos in activo["Depreciacion_Suma_Digitos"]["Activos_S"]:      
-                                TablaSuma.insert("", tk.END, values=(datos["Ano"],datos["Valor_historico"],datos["Costo_depreciable"], datos["SDA"], datos["Importe_Depreciable"],datos["Depreciacion_Acumulada"],datos["Valor_libros"]))
+                            if Activo_depC_entry.get()==activo["ID"]:
+                                for datos in activo["Depreciacion_Suma_Digitos"]["Activos_S"]:      
+                                    if Activo_depC_entry.get()==activo["ID"]:
+                                        TablaSuma.insert("", tk.END, values=(datos["Ano"],datos["Valor_historico"],datos["Costo_depreciable"], datos["SDA"], datos["Importe_Depreciable"],datos["Depreciacion_Acumulada"],datos["Valor_libros"]))
                 
                     TablaSuma.place(x=400,y=290)
-            print(ListaActivos )
-            Metodo_Dep_entry.config(state="readonly"), Activo_depC_entry.config(state="readonly")
-            break
-
-        
-        
-        
-        
+        Metodo_Dep_entry.config(state="readonly"), Activo_depC_entry.config(state="readonly")
+       
 
 Activos.Menu()  
 
