@@ -4,7 +4,7 @@ import time
 import json
 import xml.etree.ElementTree as ET
 import os
-
+#Hola
 app= tk.Tk()
 app.title("Depreciacion Activos")
 app.geometry("1350x700")
